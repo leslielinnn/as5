@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrolling Video with Text</title>
+</head>
+<body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+$(function () {
+	var video1 = $("#vd1");
+	var video2 = $("#vd2");
+	var video1_pos = video1.offset().top;
+	var video2_pos = video2.offset().top;
+	var video1_end = video1.offset().top + video1.parent().parent().height();
+	var video2_end = video2.offset().top + video2.parent().parent().height();
+	
+	$(window).scroll(function () {
+		var scrolled = $(window).scrollTop();
+		if (scrolled > vd1_pos && scrolled < vd1_end && !vd1.hasClass("played")) {
+			vd1.get(0).play();
+			vd1.addClass("played");
+		}
+		if(scrolled == 0 && vd1.hasClass("played")){
+			vd1.removeClass("played");
+		}
+		
+		if (scrolled > vd2_pos && scrolled < vd2_end && !vd2.hasClass("played")) {
+			vd2.get(0).play();
+			vd2.addClass("played");
+		}
+		if(scrolled == 0 && video2.hasClass("played")){
+			vd2.removeClass("played");
+		}
+
+	});
+});
+    </script>
+    <style>
+        #video {
+            position: fixed;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            top: -20vh;
+        }
+
+        h1 {
+            position: relative;
+            top: 50vh;
+            left: 20vw;
+            background-color: white;
+        }
+
+        .container-fluid {
+            position: relative;
+        }
+    </style>
+
+    <div style="height:200vh;background-color:beige"></div>
+
+    <div class="container-fluid">
+        <!-- <video id="video" src="assets/obama2.mp4"></video> -->
+        <video id="video" src="https://web.cw.com.tw/climate-2020/landing/cover-mobile.mp4"></video>
+        <div style="position:absolute; z-index:20; width:100%;">
+            <div id="vd1" style="width:100%; height:500vh; background-color: rgba(0, 0, 0, 0.7)">
+                <h1>Touching sentence 1: ohohoh</h1>
+            </div>
+            <div id="middle" style="height:200vh;background-color:gray"></div>
+            <div id="vd2" style="width:100%; height:500vh; background:rgba(0, 0, 0, 0.5)">
+                <h1>Touching sentence 2: ohohoh</h1>
+            </div>
+            <div style="width:100%; height:500vh; background:rgba(0, 0, 0, 0.3)">
+                <h1>Touching sentence 3: ohohoh</h1>
+            </div>
+            <div style="width:100%; height:200vh; background:rgba(0, 0, 0, 0.1)"></div>
+        </div>
+    </div>
+</body>
+</html>
